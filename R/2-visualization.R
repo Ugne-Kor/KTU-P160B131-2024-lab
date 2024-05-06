@@ -5,7 +5,7 @@ library(ggplot2)
 data = readRDS("../data/duomenys.rds")
 #2.1 užduotis
 
-pirmas = ggplot(data = data, aes(x = vidutinis_atlyginimas)) +
+pirmas = ggplot(data = data, aes(x = avgWage)) +
   geom_histogram(bins = 120, fill = "magenta", color = "pink", size = 0.7) +
   labs(title = "Vidutinis atlyginimas")
 
