@@ -5,9 +5,9 @@ library(ggplot2)
 data = readRDS("../data/duomenys.rds")
 #2.1 užduotis
 
-pirmas = ggplot(data = data, aes(x = avgWage)) +
+pirmas = ggplot(data = data, aes(x = vidutinis_atlyginimas)) +
   geom_histogram(bins = 120, fill = "magenta", color = "pink", size = 0.7) +
-  labs(title = "Average wage histogram")
+  labs(title = "Vidutinis atlyginimas")
 
 ggsave("../img/Grafikas_1.png", pirmas, width = 3000,
        height = 1500, units = ("px"))
