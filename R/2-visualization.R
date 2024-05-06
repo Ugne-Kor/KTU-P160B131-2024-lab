@@ -1,44 +1,47 @@
 library(tidyverse)
 library(ggplot2)
 
+
+data = readRDS("../data/duomenys.rds")
 #2.1 užduotis
 
-graph_1 <- ggplot(data = data_clean, aes(x = avgWage)) +
-  geom_histogram() +
-  labs(y = "Kiekis", x = "Vidutinis atlyginimas", main = "Vidutinio atlyginimo histograma")
+pirmas = ggplot(data = data, aes(x = avgWage)) +
+  geom_histogram(bins = 120, fill = "magenta", color = "pink", size = 0.7) +
+  labs(title = "Average wage histogram")
 
-ggsave("../img/1_uzd.png", graph_1, width = 3000, height = 1500, units = ("px"))
+ggsave("../img/Grafikas_1.png", pirmas, width = 3000,
+       height = 1500, units = ("px"))
 
 # 2.2 užduotis (Top 5 imones pagal darbuotojus)
 
-top_5 <- data_clean %>%
-  group_by(name) %>%
-  summarise(wage = max(avgWage)) %>%
-  arrange(desc(wage)) %>%
+top5 = data %>%
+  group_by(name)%>%
+  summarise(salary = max(avgWage))%>%
+  arrange(desc(salary))%>%
   head(5)
 
-graph_2 <- data %>%
-  filter(name %in% top_5$name) %>%
-  mutate(month = ym(month)) %>%
-  ggplot(aes(x = month, y = avgWage, color = name)) +
-  geom_line() +
-  labs(x = "Mėnesiai", y = "Vidutinis atlyginimas", color = "Įmonės")
+antras = data%>%
+  filter(name%in% top5$name) %>%
+  mutate(Months=ym(month)) %>%
+  ggplot(aes(x = Months, y = avgWage, color = name)) + geom_line()+ theme_classic() +
+  labs(title = "Top 5 įmonės pagal darbo užmokestį", x = "Mėnesiai", y  = "Vidutinis atlyginimas", color = "Įmonės pavadinimas")
 
-ggsave("../img/2.2_uzd.png", graph_2, width = 3000,
-       height = 1500, units = ("px"))
+ggsave("../img/Grafikas_2.png", antras, width = 3000, height = 1500, units = ("px"))
 
 # 2.3 užduotis (Didžiausių įmonių apdraustų darbuotojųe skaičius)
 
-graph_3 = data %>%
-  filter(name %in% top_5$name) %>%
+TopInsured = data %>%
+  filter(name %in% top5$name) %>%
   group_by(name)%>%
-  summarise(Ins=max(numInsured))%>%
-  arrange(desc(Ins))
+  summarise(Insured=max(numInsured))%>%
+  arrange(desc(Insured))
 
-graph_3$name = factor(graph_3$name, levels = graph_3$name[order(graph_3$Ins, decreasing = T)])
 
-graph_4 = graph_3%>%
-  ggplot(aes(x = name, y = Ins, fill = name)) + geom_col() + theme_classic() +
-  labs(title = " 5 didžiausių įmonių apdraustų darbutuojų skaičius", x = "Įmonė", y  = "Apdaraustų darbutojų skaičius", fill = "Įmonių pavadinimai")
+TopInsured$name = factor(TopInsured$name, levels = TopInsured$name[order(TopInsured$Insured, decreasing = T)])
 
-ggsave("../img/2.3_uzd.png", graph_4, width = 5000, height = 2500, units = ("px"))
+
+trecias = TopInsured%>%
+  ggplot(aes(x = name, y = Insured, fill = name)) + geom_col() + theme_classic() +
+  labs(title = "Top 5 įmonės pagal apdraustųjų skaičių", x = "Įmonė", y  = "Apdraustieji", fill = "Įmonės pavadinimas")
+
+ggsave("../img/Grafikas_3.png", trecias, width = 5000, height = 2500, units = ("px"))
