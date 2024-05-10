@@ -28,7 +28,7 @@ Atsakymas:
 
 ![apdraustieji](img/Grafikas_3.png)
 
-Išvados:
+Išvados: Daugiausiai apdraustų yra "UAB FRACHT"
 
 
 ### 3. Užduotis
