@@ -11,7 +11,7 @@ Atsakymas:
 
 ![histograma](img/Grafikas_1.png)
 
-Išvados:
+Išvados: Beveik niekas negauna daugiau nei 1000 eurų, daugiausiai yra maždaug ties 500 riba
 
 ### 2.2 Užduotis
 
@@ -19,14 +19,14 @@ Atsakymas:
 
 ![atlyginimai](img/Grafikas_2.png)
 
-Išvados:
+Išvados: 2023 metais daugiausiai pajamų turėjo "UAB IPUKIS LOGISTICS"
 
 
 ### 2.3 Užduotis
 
 Atsakymas:
 
-![apdraustieji](img/Grafikas_.png)
+![apdraustieji](img/Grafikas_3.png)
 
 Išvados:
 
@@ -35,4 +35,4 @@ Išvados:
 
 Shiny R aplikacijos nuotrauka:
 
-![shiny app](img/shiny.png)
+![shiny app](img/Shiny.png)
